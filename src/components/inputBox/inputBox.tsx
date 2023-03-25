@@ -1,14 +1,15 @@
 import { useState } from 'react';
+import { IinputBox } from '../../utils/interfaces';
 import styles from './inputBox.module.scss';
 
-const InputBox = (props: any) => {
-  const [text, setText] = useState('');
+const InputBox = (props: IinputBox) => {
+  const [text, setText] = useState<string>('');
 
   const onBtnClick = () => {
     props.onClick(text);
   };
 
-  const onChangeHandle = (event: any) => {
+  const onChangeHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
@@ -20,7 +21,11 @@ const InputBox = (props: any) => {
         onChange={onChangeHandle}
         placeholder='Enter text...'
       ></input>
-      <button className={styles['input-button']} disabled={props.isLoading} onClick={onBtnClick}>
+      <button
+        className={styles['input-button']}
+        disabled={props.isLoading}
+        onClick={onBtnClick}
+      >
         {props.isLoading ? 'Loading...' : 'Submit'}
       </button>
     </div>
